@@ -1,0 +1,78 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Habits{% endblock %}
+
+{% block content %}
+
+<h2 class="text-3xl font-bold mb-8">Manage Your Habits</h2>
+
+<!-- Add / Update Form -->
+<div class="bg-[#0F1035] p-6 rounded-xl mb-8 shadow-lg">
+
+    <h3 class="text-xl font-bold mb-4">
+        {% if edit_habit %} Update Habit {% else %} Add New Habit {% endif %}
+    </h3>
+
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        {% if edit_habit %}
+            <input type="hidden" name="habit_id" value="{{ edit_habit.id }}">
+        {% endif %}
+
+        <input type="text" name="title"
+               value="{% if edit_habit %}{{ edit_habit.title }}{% endif %}"
+               placeholder="Habit Title"
+               class="w-full p-3 rounded bg-gray-800 text-white" required>
+
+        <textarea name="description"
+                  placeholder="Habit Description"
+                  class="w-full p-3 rounded bg-gray-800 text-white">{% if edit_habit %}{{ edit_habit.description }}{% endif %}</textarea>
+
+        {% if edit_habit %}
+            <button type="submit" name="update_habit"
+                    class="bg-yellow-500 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-600">
+                Update Habit
+            </button>
+        {% else %}
+            <button type="submit" name="add_habit"
+                    class="bg-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+                Add Habit
+            </button>
+        {% endif %}
+
+    </form>
+</div>
+
+<!-- Habit List -->
+<div class="grid gap-6">
+
+    {% for habit in habits %}
+    <div class="bg-[#1B1C3A] p-6 rounded-xl shadow-md flex justify-between items-center">
+
+        <div>
+            <h4 class="text-xl font-bold">{{ habit.title }}</h4>
+            <p class="text-gray-400">{{ habit.description }}</p>
+        </div>
+
+        <div class="space-x-4">
+
+            <a href="?edit={{ habit.id }}"
+               class="bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-600">
+                Edit
+            </a>
+
+            <a href="?delete={{ habit.id }}"
+               class="bg-red-600 px-4 py-2 rounded hover:bg-red-700">
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+    {% empty %}
+        <p class="text-gray-400">No habits added yet.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

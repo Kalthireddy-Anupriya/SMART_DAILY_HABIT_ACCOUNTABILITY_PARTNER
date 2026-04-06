@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Overview Page{% endblock %}
+
+{% block content %}
+
+<!-- Flowbite -->
+<script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+.card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(75, 85, 99, 0.85);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  backdrop-filter: blur(4px);
+}
+
+.card:hover .overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+</style>
+
+
+<!-- ===================================================== -->
+<!-- FULL WIDTH AUTO BACKGROUND CAROUSEL -->
+<!-- ===================================================== -->
+<section class="w-full h-screen">
+
+<div id="bg-carousel"
+     class="relative w-full h-screen"
+     data-carousel="slide"
+     data-carousel-interval="3500">
+
+  <div class="relative h-screen overflow-hidden">
+
+    <!-- Slide 1 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+      <img src="{% static 'images/slide1.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Create Habits Easily</h3>
+          <p>Users can create personalized daily habits and start their self improvement journey.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide2.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Track Daily Progress</h3>
+          <p>Mark habits every day and maintain powerful consistency streaks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide3.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Smart System Analysis</h3>
+          <p>The system automatically calculates performance and gives insights.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide4.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Daily Reports & Insights</h3>
+          <p>Visual reports help users understand their growth and improvement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide5.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Smart User Dashboard</h3>
+          <p>View all your habits, progress, and performance in one place.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide6.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Build Strong Consistency</h3>
+          <p>Maintain daily streaks and develop long-term discipline.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="{% static 'images/slide7.jpg' %}"
+           class="absolute w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative flex items-center justify-center h-full text-white text-center px-6">
+        <div class="max-w-xl">
+          <h3 class="text-3xl md:text-5xl font-bold mb-3">Track Progress History</h3>
+          <p>Review past performance and monitor long-term improvement.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- PROJECT WORKFLOW -->
+<!-- ===================================================== -->
+<section class="w-full py-20 bg-gray-100 bg-gradient-to-br from-indigo-100 via-white to-indigo-200">
+
+<div class="grid grid-cols-3 items-center px-10 mb-12 ">
+<div></div>
+<h2 class="text-4xl font-bold text-gray-800 text-center">Project Overview</h2>
+<div class="flex justify-end gap-3">
+<button onclick="scrollCards(-1)" class="bg-black text-white w-10 h-10 rounded-full">❮</button>
+<button onclick="scrollCards(1)" class="bg-black text-white w-10 h-10 rounded-full">❯</button>
+</div>
+</div>
+
+<div id="overviewContainer"
+     class="flex gap-8 px-10 overflow-hidden scroll-smooth">
+
+<!-- STEP 1 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-globe text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">User Enters Website</h3>
+  <div class="overlay">
+    The user visits the platform, creates an account or logs in securely, and accesses their personal dashboard.
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-plus text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">User Creates Habits</h3>
+  <div class="overlay">
+    The user defines daily goals such as exercise, reading, study time, or meditation and sets tracking preferences.
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-list text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">System Shows Today’s Habits</h3>
+  <div class="overlay">
+    The system automatically displays all habits scheduled for the current day in an organized list.
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-check text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">User Marks Habits</h3>
+  <div class="overlay">
+    The user updates habit status by marking tasks as completed, skipped, or pending for the day.
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-pink-100 text-pink-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-calculator text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">System Calculates Performance</h3>
+  <div class="overlay">
+    The system analyzes completion rates, calculates consistency score, and evaluates daily performance automatically.
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600 mb-6 shadow-md mx-auto">
+    <i class="fas fa-file-alt text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">Daily Report Generated</h3>
+  <div class="overlay">
+    A detailed report is generated showing progress summary, achievements, missed habits, and improvement suggestions.
+  </div>
+</div>
+
+<!-- STEP 7 -->
+<div class="card min-w-[280px] rounded-2xl shadow-xl bg-white p-10 text-center">
+  <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 mb-6 shadow-md mx-auto">
+    <i class="fas fa-chart-line text-3xl"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-black">User Views Progress History</h3>
+  <div class="overlay">
+    The user reviews long-term performance trends, progress charts, and habit history to track improvement over time.
+  </div>
+</div>
+
+</div>
+</section>
+
+<script>
+function scrollCards(direction) {
+  const container = document.getElementById("overviewContainer");
+  container.scrollLeft += direction * 350;
+}
+</script>
+
+{% endblock %}

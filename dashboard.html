@@ -1,0 +1,127 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-950 text-white p-6">
+
+    <!-- WELCOME SECTION -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold">
+            Welcome, {{ request.user.username }} 👋
+        </h1>
+        <p class="text-gray-400 mt-2">
+            Today: {{ today }}
+        </p>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="grid grid-cols-4 gap-6 mb-10">
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Total Habits</h2>
+            <p class="text-4xl font-bold text-blue-500 mt-2">
+                {{ total_habits }}
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Completed Today</h2>
+            <p class="text-4xl font-bold text-green-500 mt-2">
+                {{ completed_today }}
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Success Rate</h2>
+            <p class="text-4xl font-bold text-purple-500 mt-2">
+                {{ success_rate }}%
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Active Streak</h2>
+            <p class="text-4xl font-bold text-yellow-400 mt-2">
+                🔥 {{ active_streak }}
+            </p>
+        </div>
+
+    </div>
+
+    <!-- TODAY HABITS -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-xl mb-10">
+
+        <h2 class="text-xl mb-6 text-blue-400">
+            Today's Habits
+        </h2>
+
+        {% if habits.exists %}
+            {% for habit in habits %}
+                <div class="flex items-center justify-between py-2 border-b border-gray-700">
+                    <span class="font-medium">{{ habit.title }}</span>
+                    {% if habit.last_completed == today %}
+                        <span class="text-green-400 font-bold">Completed ✓</span>
+                    {% else %}
+                        <a href="{% url 'mark_complete' habit.id %}"
+                           class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg">
+                            Mark Complete
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-gray-400">You have no habits yet. Add one in Manage Habits.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- QUICK NAVIGATION -->
+    <div class="grid grid-cols-4 gap-6 mb-10">
+
+        <a href="{% url 'habits' %}" 
+           class="bg-blue-600 hover:bg-blue-700 p-4 text-center rounded-xl font-semibold">
+            Manage Habits
+        </a>
+
+        <a href="{% url 'history' %}" 
+           class="bg-green-600 hover:bg-green-700 p-4 text-center rounded-xl font-semibold">
+            View History
+        </a>
+
+        <a href="{% url 'streaks' %}" 
+           class="bg-purple-600 hover:bg-purple-700 p-4 text-center rounded-xl font-semibold">
+            Streaks
+        </a>
+
+        <a href="{% url 'charts' %}" 
+           class="bg-yellow-500 hover:bg-yellow-600 p-4 text-center rounded-xl font-semibold">
+            Charts
+        </a>
+
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-xl">
+
+        <h2 class="text-xl mb-6 text-blue-400">
+            Recent Activity
+        </h2>
+
+        <div class="space-y-3">
+
+            {% for entry in recent_activity %}
+                <div class="flex justify-between bg-gray-800 p-3 rounded-lg">
+                    <span>{{ entry.habit.title }}</span>
+                    <span class="text-gray-400 text-sm">{{ entry.date }}</span>
+                </div>
+            {% empty %}
+                <p class="text-gray-400">No recent activity.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

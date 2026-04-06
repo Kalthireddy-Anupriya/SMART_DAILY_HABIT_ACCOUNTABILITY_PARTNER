@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="relative h-screen flex items-center justify-center text-center">
+
+  <img src="{% static 'images/home1.jpg' %}"
+  class="absolute inset-0 w-full h-full object-cover">
+
+  <div class="absolute inset-0 bg-black opacity-70"></div>
+
+  <div class="relative z-10 max-w-3xl px-6">
+    <h1 class="text-5xl font-bold mb-6">
+      Build Better Habits, Transform Your Life
+    </h1>
+
+    <p class="text-lg text-gray-300 mb-8">
+      The Smart Daily Habit Accountability Partner helps you stay consistent,
+      track progress, and achieve your goals.
+    </p>
+
+
+    <a href="{% url 'register' %}">
+    <button class="bg-indigo-600 hover:bg-indigo-700 text-white
+               px-8 py-3 rounded-xl font-semibold
+               transition shadow-lg">
+  Get Started
+</button>
+</a>
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="bg-white text-gray-800 py-20 bg-gradient-to-br from-indigo-100 via-white to-indigo-200">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center ">
+
+    <img src="{% static 'images/home2.jpg' %}" class="rounded-xl shadow-xl">
+
+    <div>
+      <h2 class="text-4xl font-bold mb-6">About The Project</h2>
+       <!-- Paragraph 1 -->
+      <p class="text-lg leading-relaxed text-justify mb-4">
+        Smart Daily Habit Accountability Partner is a web-based application
+        designed to help users develop and maintain positive daily habits
+        through structured tracking and accountability. The system allows
+        users to create personalized habits, record daily activities, and
+        monitor progress using visual insights such as consistency tracking
+        and performance indicators.
+      </p>
+
+      <!-- Paragraph 2 -->
+      <p class="text-lg leading-relaxed text-justify">
+        The platform addresses common challenges like lack of motivation,
+        irregular routines, and poor self-discipline by turning daily actions
+        into measurable outcomes. With a simple and user-friendly interface,
+        the system encourages long-term consistency and personal growth.
+        This project demonstrates how modern web technologies can be used
+        effectively to support productivity and self-improvement.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- OVERVIEW CARDS -->
+<section class="py-20 bg-gray-100 text-gray-800 bg-gradient-to-br from-indigo-100 via-white to-indigo-200">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h2 class="text-4xl font-bold text-center mb-12">Project Overview</h2>
+
+   <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition">
+        <div class="text-3xl mb-4">✅</div>
+        <h3 class="text-xl font-semibold mb-2">Habit Tracking</h3>
+        <p class="text-gray-600">Track daily habits and monitor consistency.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition">
+        <div class="text-3xl mb-4">🔥</div>
+        <h3 class="text-xl font-semibold mb-2">Streak Monitoring</h3>
+        <p class="text-gray-600">Maintain streaks and stay motivated.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition">
+        <div class="text-3xl mb-4">🧠</div>
+        <h3 class="text-xl font-semibold mb-2">AI Motivation</h3>
+        <p class="text-gray-600">Smart suggestions to improve habits.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:-translate-y-2 transition">
+        <div class="text-3xl mb-4">📊</div>
+        <h3 class="text-xl font-semibold mb-2">Visual Progress</h3>
+        <p class="text-gray-600">Charts and analytics for performance.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

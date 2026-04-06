@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<!-- ================= BANNER SECTION ================= -->
+<section 
+  class="relative h-screen bg-cover bg-center"
+  style="background-image: url('{% static "images/about us img.jpg" %}');"
+>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col justify-center items-center h-full text-center px-6 pt-20">
+    <h1 class="text-white text-4xl md:text-5xl font-bold mb-4">
+      About Smart Daily Habit Accountability Partner
+    </h1>
+
+    <p class="text-gray-200 max-w-2xl mb-6">
+      Helping you build better habits, stay consistent, and achieve your goals every single day.
+    </p>
+
+    <button
+      onclick="scrollToAbout()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white
+               px-8 py-3 rounded-xl font-semibold
+               transition shadow-lg">
+      Know More
+    </button>
+  </div>
+</section>
+
+
+<!-- ================= ABOUT CONTENT ================= -->
+<section id="about-content" class="py-16 px-6 md:px-16 bg-white bg-gradient-to-br from-indigo-100 via-white to-indigo-200">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+    <!-- Image -->
+    <div>
+      <img 
+        src="{% static 'images/about1.jpg' %}"   
+        class="rounded-xl shadow-lg"
+        alt="Habit Building"
+      />
+    </div>
+
+    <!-- Content -->
+    <div>
+      <h2 class="text-3xl font-bold mb-4 text-gray-800">
+        Who We Are
+      </h2>
+
+      <p class="text-gray-600 mb-4">
+        Smart Daily Habit Accountability Partner is designed to help individuals
+        build and maintain positive habits through daily tracking, consistency,
+        and motivation.
+      </p>
+
+      <p class="text-gray-600 mb-4">
+        Our system allows users to add habits, track daily progress, monitor
+        streaks, and receive motivation to stay accountable.
+      </p>
+
+      <p class="text-gray-600">
+        This project focuses on simplicity, clarity, and effectiveness, making
+        habit-building an easy and rewarding experience.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function scrollToAbout() {
+  document.getElementById("about-content").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
+
+{% endblock %}

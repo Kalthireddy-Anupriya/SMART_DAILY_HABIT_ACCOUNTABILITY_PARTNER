@@ -1,0 +1,134 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Charts{% endblock %}
+
+{% block content %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="min-h-screen bg-gray-950 text-white p-6">
+
+    <!-- PAGE TITLE -->
+    <h1 class="text-3xl font-bold mb-8 text-center">
+        Habit Performance Dashboard
+    </h1>
+
+    <!-- SUMMARY SECTION (Like top cards in dashboard) -->
+    <div class="grid grid-cols-3 gap-6 mb-10">
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-lg text-gray-400">Total Habits</h2>
+            <p class="text-4xl font-bold text-blue-500 mt-2">
+                {{ total_habits }}
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-lg text-gray-400">Total Completed Days</h2>
+            <p class="text-4xl font-bold text-green-500 mt-2">
+                {{ total_completed }}
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-lg text-gray-400">Highest Current Streak</h2>
+            <p class="text-4xl font-bold text-purple-500 mt-2">
+                {{ highest_streak }}
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN 3 SECTION LAYOUT (Like your habits page structure) -->
+    <div class="grid grid-cols-3 gap-8">
+
+        <!-- LEFT SECTION -->
+        <div class="bg-gray-900 p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl mb-4 text-blue-400">Total Completed</h2>
+            <canvas id="completionChart"></canvas>
+        </div>
+
+        <!-- MIDDLE SECTION -->
+        <div class="bg-gray-900 p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl mb-4 text-green-400">Current Streak</h2>
+            <canvas id="streakChart"></canvas>
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="bg-gray-900 p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl mb-4 text-purple-400">Longest Streak</h2>
+            <canvas id="longestChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    const habitNames = [
+        {% for habit in habits %}
+            "{{ habit.title }}",
+        {% endfor %}
+    ];
+
+    const totalCompleted = [
+        {% for habit in habits %}
+            {{ habit.total_completed_days }},
+        {% endfor %}
+    ];
+
+    const currentStreak = [
+        {% for habit in habits %}
+            {{ habit.streak }},
+        {% endfor %}
+    ];
+
+    const longestStreak = [
+        {% for habit in habits %}
+            {{ habit.longest_streak }},
+        {% endfor %}
+    ];
+
+    // TOTAL COMPLETED
+    new Chart(document.getElementById("completionChart"), {
+        type: "bar",
+        data: {
+            labels: habitNames,
+            datasets: [{
+                label: "Total Completed Days",
+                data: totalCompleted,
+                backgroundColor: "#3b82f6"
+            }]
+        }
+    });
+
+    // CURRENT STREAK
+    new Chart(document.getElementById("streakChart"), {
+        type: "bar",
+        data: {
+            labels: habitNames,
+            datasets: [{
+                label: "Current Streak",
+                data: currentStreak,
+                backgroundColor: "#22c55e"
+            }]
+        }
+    });
+
+    // LONGEST STREAK
+    new Chart(document.getElementById("longestChart"), {
+        type: "bar",
+        data: {
+            labels: habitNames,
+            datasets: [{
+                label: "Longest Streak",
+                data: longestStreak,
+                backgroundColor: "#a855f7"
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

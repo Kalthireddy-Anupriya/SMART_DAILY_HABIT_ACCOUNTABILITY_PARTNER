@@ -1,0 +1,72 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Streaks{% endblock %}
+
+{% block content %}
+
+<h2 class="text-3xl font-bold mb-8">🔥 Your Streak Performance</h2>
+
+<div class="grid md:grid-cols-2 gap-6">
+
+{% for habit in habits %}
+<div class="bg-[#1B1C3A] p-6 rounded-2xl shadow-lg">
+
+    <h3 class="text-xl font-bold mb-4 text-indigo-400">
+        {{ habit.title }}
+    </h3>
+
+    <div class="space-y-2 text-gray-300">
+
+        <p>
+            🔥 Current Streak:
+            <span class="text-white font-bold text-lg">
+                {{ habit.streak }} days
+            </span>
+        </p>
+
+        <p>
+            🏆 Longest Streak:
+            <span class="text-white font-semibold">
+                {{ habit.longest_streak }} days
+            </span>
+        </p>
+
+        <p>
+            ✅ Total Completed:
+            <span class="text-white font-semibold">
+                {{ habit.total_completed_days }} days
+            </span>
+        </p>
+
+        <p>
+            📅 Last Completed:
+            <span class="text-white font-semibold">
+                {{ habit.last_completed|default:"Not yet completed" }}
+            </span>
+        </p>
+
+    </div>
+
+    <div class="mt-6">
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="habit_id" value="{{ habit.id }}">
+
+            <button
+            type="submit"
+            class="bg-indigo-600 px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition text-white">
+            Mark as Completed Today
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+{% empty %}
+<p class="text-gray-400">No habits found. Add habits first.</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

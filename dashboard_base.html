@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Dashboard{% endblock %}</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white flex flex-col min-h-screen">
+
+<!-- TOP NAVBAR -->
+<header class="bg-[#0F1035]/90 backdrop-blur-md fixed w-full z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-6">
+    
+    <!-- Logo -->
+    <h1 class="text-2xl font-bold tracking-wide">Smart Habit</h1>
+
+    <!-- Navigation -->
+    <nav class="space-x-10 text-lg font-semibold text-gray-300">
+
+    <nav class="space-x-8 text-gray-300 font-medium">
+      <a href="{% url 'home' %}" class="hover:text-white">Home</a>
+      <a href="{% url 'about' %}" class="hover:text-white">About Us</a>
+      <a href="{% url 'overview' %}" class="hover:text-white">Overview</a>
+      <a href="{% url 'contact' %}" class="hover:text-white">Contact</a>
+
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN SECTION -->
+<div class="flex flex-1 pt-20">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-[#0F1035] flex flex-col justify-between p-6">
+
+<div class="space-y-4 text-center">
+
+    
+  
+  <a href="{% url 'dashboard' %}" 
+     class="block text-xl font-bold py-3 rounded hover:bg-indigo-700 transition">
+     Dashboard
+  </a>
+
+  <a href="{% url 'history' %}" 
+     class="block text-xl font-bold py-3 rounded hover:bg-indigo-700 transition">
+     History
+  </a>
+
+  <a href="{% url 'habits' %}" 
+     class="block text-xl font-bold py-3 rounded hover:bg-indigo-700 transition">
+     Habits
+  </a>
+
+  <a href="{% url 'charts' %}" 
+     class="block text-xl font-bold py-3 rounded hover:bg-indigo-700 transition">
+     Charts
+  </a>
+
+  <a href="{% url 'streaks' %}" 
+     class="block text-xl font-bold py-3 rounded hover:bg-indigo-700 transition">
+     Streaks
+  </a>
+
+</div>
+
+    <a href="{% url 'logout' %}" 
+   class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white
+          px-8 py-3 rounded-xl font-semibold
+          transition shadow-lg">
+   Logout
+</a>
+
+  </aside>
+
+  <!-- CONTENT AREA -->
+  <main class="flex-1 p-10">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-[#0F1035] text-gray-300 text-center py-6">
+  <p>© 2026 Smart Daily Habit Accountability Partner</p>
+</footer>
+
+</body>
+</html>

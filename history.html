@@ -1,0 +1,90 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}History{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-950 text-white p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">Habit History</h1>
+
+    <div class="flex justify-center gap-6 mb-8">
+        <a href="?filter=daily"
+           class="px-6 py-2 rounded-lg {% if filter_type == 'daily' %}bg-blue-600{% else %}bg-gray-700{% endif %}">
+            Daily
+        </a>
+        <a href="?filter=weekly"
+           class="px-6 py-2 rounded-lg {% if filter_type == 'weekly' %}bg-blue-600{% else %}bg-gray-700{% endif %}">
+            Weekly
+        </a>
+        <a href="?filter=monthly"
+           class="px-6 py-2 rounded-lg {% if filter_type == 'monthly' %}bg-blue-600{% else %}bg-gray-700{% endif %}">
+            Monthly
+        </a>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6 mb-10">
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Total Entries</h2>
+            <p class="text-4xl font-bold text-blue-500 mt-2">{{ total_entries }}</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Active Habits</h2>
+            <p class="text-4xl font-bold text-green-500 mt-2">{{ unique_habits }}</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl text-center shadow-lg">
+            <h2 class="text-gray-400">Selected View</h2>
+            <p class="text-2xl font-bold text-purple-500 mt-2 capitalize">{{ filter_type }}</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-xl mb-10">
+        <h2 class="text-xl mb-6 text-blue-400">{{ filter_type|title }} Graph</h2>
+        <canvas id="historyChart" class="w-full h-80"></canvas>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-xl">
+        <h2 class="text-xl mb-6 text-blue-400">{{ filter_type|title }} History</h2>
+        <div class="space-y-4 max-h-[400px] overflow-y-auto">
+            {% for entry in history %}
+                <div class="flex justify-between bg-gray-800 p-4 rounded-lg">
+                    <div>
+                        <p class="font-semibold">{{ entry.habit.title }}</p>
+                        <p class="text-gray-400 text-sm">{{ entry.date }}</p>
+                    </div>
+                    <div class="text-green-400 font-bold">Completed ✓</div>
+                </div>
+            {% empty %}
+                <p class="text-gray-400 text-center">No records found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const chartLabels = JSON.parse('{{ chart_labels_json|escapejs }}');
+    const chartData = JSON.parse('{{ chart_data_json|escapejs }}');
+
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    if (window.historyChartInstance) { window.historyChartInstance.destroy(); }
+
+    window.historyChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Completed Habits',
+                data: chartData,
+                backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+</script>
+{% endblock %}
